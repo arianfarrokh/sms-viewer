@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# خواندن پیام‌ها از فایل
+# خواندن پیام‌ها از فایلp
 def read_messages():
     if not STORE_FILE.exists():
         return []
