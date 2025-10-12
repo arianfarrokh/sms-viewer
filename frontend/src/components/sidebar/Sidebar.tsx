@@ -1,61 +1,53 @@
-"use client";
-
-import React  from "react";
-import {
-  Box,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 import Link from "next/link";
 
-const drawerWidth = 240;
+export default function Sidebar() {
+  const navLinkLists = [
+    {
+      href: "/",
+      label: "تست",
+    },
+    {
+      href: "/check-in",
+      label: "ورود",
+    },
+    {
+      href: "/check-out",
+      label: "خروج",
+    },
+  ];
 
- type NavLinkType = {
-  label: string;
-  href: string;
-};
-
-type SidebarType = {
-  navLinkList: NavLinkType[];
-};
-
-
-
-
-const Sidebar: React.FC<SidebarType> = ({ navLinkList }) => {
   return (
-    <Box>
-      <Drawer
-        variant="permanent"
-        sx={{
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-             marginTop : 9,
-            backgroundColor: "grey",
-            boxSizing: "border-box",
-          },
-        }}
-      >
-        <Toolbar />
-        <Divider />
-        <List>
-          {navLinkList.map((link, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemButton component={Link} href={link.href}>
-                <Typography fontSize={'1.2rem'} fontWeight={'bold'} component={"h3"} >{link.label}</Typography>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </Box>
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: 240,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: 240,
+          boxSizing: "border-box",
+          backgroundColor: "#1a202c",
+          color: "#fff",
+        },
+      }}
+    >
+      <List sx={{ mt: 8, p: 2 }}>
+        {navLinkLists.map((link) => (
+          <ListItem
+            key={link.href}
+            component={Link}
+            href={link.href}
+            sx={{
+              "&:hover": {
+                backgroundColor: "#2d3748",
+                borderRadius: "4px",
+              },
+            }}
+          >
+            <ListItemText primary={link.label} />
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
   );
-};
-
-export default Sidebar;
+}
