@@ -13,12 +13,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navLinkLists = [
-    {
-      href: "/",
-      label: "test",
-    },
-  ];
+
   return (
     <RTLThemeProvider>
       <html lang="fa" dir="rtl">
