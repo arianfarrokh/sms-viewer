@@ -1,3 +1,6 @@
+"use client"
+
+
 import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 import Link from "next/link";
 

@@ -1,11 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
+import HeaderHome from "./HeaderHome";
 
 const HomeComponent = () => {
   return (
-    <Box>
-        <Typography textAlign={'start'}>sduvsduvbp[oihvb9oavbaiuvbsbv</Typography>
-    </Box>
+    <>
+      <Box mx={20}>
+        <HeaderHome />
+        
+      </Box>
+    </>
   );
 };
 
