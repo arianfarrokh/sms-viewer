@@ -1,13 +1,15 @@
 import React from "react";
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import MessageIcon from '@mui/icons-material/Message';
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
 import HeaderCard from "./HeaderCard";
-
+import { format } from 'date-fns-jalali'
 
 const HeaderHome = () => {
+  const today = new Date();
+  const formattedDate = format(today, 'yyyy/MM/dd')
   return (
     <>
       <Grid mt={5} container>
@@ -52,6 +54,70 @@ const HeaderHome = () => {
           Icon={CallMissedOutgoingIcon}
         />
       </Grid>
+      <Paper
+        sx={{
+          p: 3,
+          mt: 5,
+          borderRadius: 4,
+          bgcolor: "#E8F5E9", // سبز خیلی روشن
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            boxShadow: "0 6px 25px rgba(0,0,0,0.15)",
+            transform: "translateY(-4px)",
+          },
+        }}
+      >
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={1.5}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            color="primary"
+            sx={{ letterSpacing: "0.5px" }}
+          >
+            بانک ملت 💳
+          </Typography>
+          <Stack textAlign="end" alignItems="flex-end" spacing={0.3}>
+            <Typography
+              sx={{ fontWeight: 600, color: "#2E7D32", fontSize: "1rem" }}
+            >
+              ۲۰٬۰۰۰+
+            </Typography>
+            <Typography
+              sx={{ fontSize: "0.9rem", color: "text.secondary" }}
+            >
+              {formattedDate}
+            </Typography>
+          </Stack>
+        </Box>
+
+        <Typography
+          variant="body1"
+          fontSize="1.1rem"
+          color="#1B5E20"
+          sx={{ mb: 1 }}
+        >
+          ۲٬۰۰۰ تومان از حساب شما کم شد 💸
+        </Typography>
+
+        <Typography
+          textAlign="end"
+          variant="h4"
+          sx={{
+            color: "#388E3C",
+            fontWeight: "bold",
+            fontFamily: "IranSans, sans-serif",
+          }}
+        >
+          ۱۰٬۰۰۰
+        </Typography>
+      </Paper>
+
     </>
   );
 };

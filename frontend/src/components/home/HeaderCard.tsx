@@ -16,7 +16,7 @@ const HeaderCard: React.FC<Props> = ({ title, description, bgcolor, Icon }) => {
                 <IconButton sx={{ justifyContent: "start" }}>
                     <Icon sx={{ fontSize: 50 }} />
                 </IconButton>
-                <Typography variant="h5">{title}</Typography>
+                <Typography variant="h6">{title}</Typography>
                 <Typography variant="h4">{description}</Typography>
             </Stack>
         </Grid>
