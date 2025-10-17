@@ -5,7 +5,7 @@ import HeaderHome from "./HeaderHome";
 const HomeComponent = () => {
   return (
     <>
-      <Box mx={20}>
+      <Box mx={10}>
         <HeaderHome />
         
       </Box>
