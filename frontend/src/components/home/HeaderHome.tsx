@@ -7,7 +7,6 @@ import MessageIcon from "@mui/icons-material/Message";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import HeaderCard from "./HeaderCard";
-import { format } from "date-fns-jalali";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import MessageCard from "./MessageCard";
@@ -80,6 +79,7 @@ const HeaderHome = () => {
           amount={msg.amount}
           balance={msg.balance}
           from={msg.from}
+          type={msg.type}
           receivedAt={formatJalali(msg.receivedAt)}
         />
       ))}
