@@ -1,1 +1,12 @@
-[]
+[
+{
+  "id": 173123123,
+  "from": "BANK",
+  "body": "Deposit 100,000 Rials",
+  "type": "deposit",
+  "amount": 100000,
+  "balance": 2500000,
+  "receivedAt": "2025-10-06T14:00:00Z"
+}
+
+]

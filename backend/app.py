@@ -1,8 +1,11 @@
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
+from pydantic import BaseModel
 import json
 from datetime import datetime
+import os
+import time
 
 app = FastAPI()
 
@@ -17,7 +20,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# خواندن پیام‌ها از فایلp
+# مدل Pydantic برای پیام
+class SMS(BaseModel):
+    from_: str
+    body: str
+    receivedAt: str = None
+
+# خواندن پیام‌ها از فایل
 def read_messages():
     if not STORE_FILE.exists():
         return []
@@ -36,17 +45,17 @@ def get_messages():
 
 # Endpoint برای ارسال پیام جدید
 @app.post("/sms")
-def post_sms(from_: str, body: str, receivedAt: str = None, x_sms_secret: str = Header(None)):
+def post_sms(sms: SMS, x_sms_secret: str = Header(None)):
     SECRET = "mytestsecret"  # توکن امنیتی
     if x_sms_secret != SECRET:
         raise HTTPException(status_code=401, detail="Unauthorized")
     
-    receivedAt = receivedAt or datetime.utcnow().isoformat()
+    receivedAt = sms.receivedAt or datetime.utcnow().isoformat()
     messages = read_messages()
     messages.append({
-        "id": int(datetime.utcnow().timestamp()*1000),
-        "from": from_,
-        "body": body,
+        "id": int(time.time() * 1000),
+        "from": sms.from_,
+        "body": sms.body,
         "receivedAt": receivedAt
     })
     write_messages(messages)
