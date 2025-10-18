@@ -1,10 +1,15 @@
 type MessageType = {
-    id?: number;
-    from: string;
-    body:string;
-    type?: string;
-    amount: number;
-    balance: number;
-    receivedAt: string;
+  id?: number;
+  from: string;
+  body: string;
+  type?: string;
+  amount: number;
+  balance: number;
+  receivedAt: string;
+};
 
-}
+type StateType = {
+  totalDeposit: number;
+  totalProfit: number;
+  balance: number;
+};

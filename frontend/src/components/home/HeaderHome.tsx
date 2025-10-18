@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import {  Button, Grid, Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import MessageIcon from "@mui/icons-material/Message";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
@@ -13,18 +13,39 @@ import MessageCard from "./MessageCard";
 import { formatJalali } from "@/utils/formatJalali";
 
 const HeaderHome = () => {
-  const [messages, setMessages] = React.useState<MessageType[]>();
+  const [messages, setMessages] = React.useState<MessageType[]>([]);
+  const [stats, setStats] = React.useState<StateType>({
+    totalDeposit: 0,
+    totalProfit: 0,
+    balance: 0,
+  });
+
+  const totalMessages = messages?.length;
   React.useEffect(() => {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(`${apiUrl}/messages`);
         setMessages(res.data);
+
+        
+        const totalDeposit = messages
+          .filter((m) => m.type === "deposit")
+          .reduce((sum, m) => sum + (m.amount ?? 0), 0);
+
+        const totalProfit = messages
+          .filter((m) => m.type === "profit")
+          .reduce((sum, m) => sum + (m.amount ?? 0), 0);
+
+        const balance =
+          messages[messages.length - 1]?.balance ?? totalDeposit - totalProfit;
+
+        setStats({ totalDeposit, totalProfit, balance });
       } catch (err) {
         console.log(err, "this is an error caused whem fetching ");
       }
     };
     fetchMessages();
-  }, []);
+  }, [messages]);
   return (
     <>
       <Grid mt={5} container>
@@ -51,24 +72,24 @@ const HeaderHome = () => {
           title="همه پبام ها"
           bgcolor="#506266"
           Icon={MessageIcon}
-          description={8}
+          description={totalMessages ?? 0}
         />
         <HeaderCard
           title="کل مبلغ خرج‌شده"
           bgcolor="#e43333"
-          description={10000}
+          description={stats.totalDeposit}
           Icon={CallReceivedIcon}
         />
         <HeaderCard
           title="کل مبلغ دریافت شده"
           bgcolor="#9AEBA3"
-          description={10000}
+          description={stats.totalProfit}
           Icon={CallMissedOutgoingIcon}
         />
         <HeaderCard
           title="موجودی نهایی"
           bgcolor="#bd711aff"
-          description={10000}
+          description={stats.balance}
           Icon={CallMissedOutgoingIcon}
         />
       </Grid>

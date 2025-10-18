@@ -4,7 +4,7 @@ import React from 'react'
 
 type Props = {
     title: string;
-    description: number | string;
+    description: number;
     bgcolor: string;
     Icon: React.ElementType;
 }
