@@ -94,3 +94,12 @@ def post_sms(sms: SMS, x_sms_secret: str = Header(None)):
     })
     write_messages(messages)
     return {"success": True, "message": "Stored successfully", "balance": balance}
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://your-frontend-domain.vercel.app"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
