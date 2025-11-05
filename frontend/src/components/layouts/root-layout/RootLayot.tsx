@@ -1,4 +1,3 @@
-
 import "@/app/globals.css";
 import type { Metadata } from "next";
 import { RTLThemeProvider } from "../../rtl-layout/RTLThmeProvider";
@@ -13,17 +12,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <RTLThemeProvider>
       <html lang="fa" dir="rtl">
-       <body>
-          <Sidebar  />
+        <body>
+          <Sidebar />
           <main style={{ flex: 1, padding: "16px", marginRight: "240px" }}>
             {children}
           </main>
         </body>
-
       </html>
     </RTLThemeProvider>
   );

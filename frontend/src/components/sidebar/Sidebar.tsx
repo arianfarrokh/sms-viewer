@@ -8,10 +8,10 @@ export default function Sidebar() {
   const navLinkLists = [
     {
       href: "/",
-      label: "تست",
+      label: "پست ها",
     },
     {
-      href: "/check-in",
+      href: "/",
       label: "ورود",
     },
     {
